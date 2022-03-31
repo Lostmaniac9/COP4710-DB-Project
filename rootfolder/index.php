@@ -18,7 +18,25 @@
         <div class="row">
             <div class="col-lg-6 center">
                 <div class="container">
-                    <h2>Event name</h2>
+                    <?php
+                        $servername = "localhost";
+                        
+                        // Create connection
+                        $conn = new mysqli($servername);
+                        
+                        // Check connection
+                        if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                        }
+                        echo "Connected successfully";
+                        $sql = "SELECT * from EVENTS where approved = 'false'";
+                        if ($conn->query($sql) === TRUE) {
+                            $event_name = $conn->event_name;
+                            echo "<hr>" . $event_name .  "</hr>";
+                          } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                          }
+                    ?>
                     <p>event description</p>
                     <p>other event stuff</p>
                 </div>
