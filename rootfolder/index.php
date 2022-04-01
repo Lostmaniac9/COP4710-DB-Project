@@ -20,30 +20,29 @@
                 <div class="container">
                     <?php
                         $servername = "localhost";
+                        $username = "root";
                         
                         // Create connection
-                        $conn = new mysqli($servername);
+                        $conn = new mysqli($servername, $username);
                         
                         // Check connection
                         if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                         }
-                        echo "Connected successfully";
-                        $sql = "SELECT * from EVENTS where approved = 'false'";
-                        if ($conn->query($sql) === TRUE) {
-                            $event_name = $conn->event_name;
-                            echo "<hr>" . $event_name .  "</hr>";
-                          } else {
-                            echo "Error: " . $sql . "<br>" . $conn->error;
-                          }
+                        $conn->select_db("project_db");
+                        $result = $conn->query("SELECT * FROM `public_events` WHERE approved = 1");
+                        $events = $result->fetch_all();
+                        for($i = 0; $i < count($events); $i++)
+                        {
+                            $result = $conn->query("SELECT * FROM `events` WHERE event_ID = '{$events[$i][0]}'");
+                            $e = $result->fetch_row();
+                            echo "<h3><b>Event name: " . $e[4] . "</b></h3>";
+                            echo "<p>Event desc: " . $e[1] . "</p>";
+                            echo "<p>Event time: " . $e[2] . "</p>";
+                            echo "<p>Event loc: " . $e[3] . "</p>";
+                            echo "<hr />";
+                        }
                     ?>
-                    <p>event description</p>
-                    <p>other event stuff</p>
-                </div>
-                <div class="container">
-                    <h2>Second event name</h2>
-                    <p>event description</p>
-                    <p>other event stuff</p>
                 </div>
             </div>
             <div class="col-lg-6 center">
