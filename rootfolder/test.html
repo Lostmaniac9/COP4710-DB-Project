@@ -5,12 +5,105 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script language="JavaScript">
+
+        function testResults(form)
+        {
+            
+            document.write(form.username.value);
+        }
+        
+        </script>
 </head>
 <body>
-    <form action="/api/LoginSA.php" method="post">
-        <input name="username" />
-        <textarea name="password"></textarea>
-        <button>Send</button>
-    </form>
+    <div class="modal fade" id="login-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered justify-content-center">
+            <div class="modal-content" style="width: 400px">
+
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                </div> -->
+
+                    <form id="login-form" onSubmit="login(this, event)">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" placeholder="Username" />
+                            <label for="username">Username</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password" placeholder="Password" />
+                            <label for="password">Password</label>
+                        </div>
+                    </form>
+
+                    <div class="text-danger" id="loginResult"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="d-inline-flex me-auto" style="font-size: 16px">
+                        <div>Not a member?</div>
+                        <div class="join-btn ms-2" data-bs-target="#signup-modal" data-bs-toggle="modal"
+                            data-bs-dismiss="modal">
+                            Join us
+                        </div>
+                    </div>
+
+                    <button type="submit" form="login-form" class="btn btn-color" >
+                        Login
+                    </button>
+                    <input type="button" name="Convert" Value="convert" onClick="testResults(this.form)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="signup-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                </div>
+
+                <div class="modal-body">
+                    <form id="signup-form" class="" onSubmit="signup(this, event)">
+                        <div class="d-inline-flex mb-3 container-fluid m-0 p-0">
+                          
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="username" placeholder="Username"
+                                autocomplete="off" />
+                            <label for="signupUsername">Username</label>
+                            <div id="usernameResult" class="text-danger"></div>
+                        </div>
+
+                        <div class="d-inline-flex container-fluid m-0 p-0">
+                            <div class="form-floating me-2 container-fluid m-0 p-0">
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    autocomplete="off" />
+                                <label for="signupPassword">Password</label>
+                            </div>
+                            <div class="form-floating container-fluid m-0 p-0">
+                                <input type="password" class="form-control" name="passwordConfirm"
+                                    placeholder="Confirm Password" autocomplete="off" />
+                                <label for="signupPasswordConfirm">Confirm Password</label>
+                            </div>
+                        </div>
+                        <div id="passwordResult" class="text-danger"></div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    
+                    <button type="submit" form="signup-form" class="btn btn-color" id="signup-btn">Submit</button>
+                    <input type="button" name="Convert" Value="convert" onClick="testResults(this.form)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+    <script src="test.js"></script>
+
 </body>
 </html>
