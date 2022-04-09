@@ -22,22 +22,22 @@
                         Create event
                     </h2>
                     <div class="col-lg-4 center">
-                        <form>
+                        <form id="event_form">
                             <div class="form-group">
                                 <label for="formName">Name</label>
-                                <input type="text" class="form-control" id="formName" placeholder="Enter event name">
+                                <input type="text" class="form-control" id="event_name" placeholder="Enter event name">
                             </div>
                             <div class="form-group">
                                 <label for="formDesc">Description</label>
-                                <input type="text" class="form-control" id="formDesc" placeholder="Enter event description">
+                                <input type="text" class="form-control" id="desc1" placeholder="Enter event description">
                             </div>
                             <div class="form-group">
                                 <label for="formTime">Time</label>
-                                <input type="text" class="form-control" id="formTime" placeholder="Enter event time">
+                                <input type="text" class="form-control" id="time" placeholder="Enter event time">
                             </div>
                             <div class="form-group">
                                 <label for="formLoc">Location</label>
-                                <input type="text" class="form-control" id="formLoc" placeholder="Enter event location">
+                                <input type="text" class="form-control" id="loc_name" placeholder="Enter event location">
                             </div>
                             <div class="form-group">
                                 <label for="formLocSelect">Possible Location Selection</label>
@@ -61,23 +61,31 @@
                                 <input class="form-check-input" type="radio" name="eventType" id="RSOEvent" value="event3">
                                 <label class="form-check-label" for="exampleRadios3">RSO</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Create event</button>
+                            <button type="submit" form="event_form" class="btn btn-primary">Create event</button>
                         </form>
                     <hr />
                     <h2>
                         Create location
                     </h2>
-                        <form>
+                        <form id="loc_form">
                             <div class="form-group">
                                 <label for="formName">Name</label>
-                                <input type="number" class="form-control" id="locX" placeholder="Enter location x coordinate">
+                                <input type="text" class="form-control" id="address" placeholder="Enter location x coordinate">
                             </div>
                             <div class="form-group">
                                 <label for="formName">Name</label>
-                                <input type="number" class="form-control" id="locY" placeholder="Enter location y coordinate">
+                                <input type="text" class="form-control" id="loc_name" placeholder="Enter location y coordinate">
+                            </div>
+                            <div class="form-group">
+                                <label for="formName">Name</label>
+                                <input type="number" class="form-control" id="longitude" placeholder="Enter location x coordinate">
+                            </div>
+                            <div class="form-group">
+                                <label for="formName">Name</label>
+                                <input type="number" class="form-control" id="latitude" placeholder="Enter location x coordinate">
                             </div>
                         </form>
-                    <button type="submit" class="btn btn-primary">Create location</button>
+                    <button type="submit" form="loc_form" class="btn btn-primary">Create location</button>
                     </div>
                 </div>
             </div>
