@@ -9,6 +9,35 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+    <!--<table class = "table table-striped">
+        <tr class = "bg-info">
+            <th>Name</th>
+            <th>Name</th>
+            <th>Name</th>
+            <th>Name</th>
+            <th>Name</th>
+        </tr>
+        <tbody id = "myTable"></tbody>
+    </table>
+    <script>
+        function buildTable(data){
+            var table = document.getElementByID('myTable');
+            for(var i = 0; i < data.length; i++){
+                var row = `<tr>
+                            <td${data[i].event_ID} </td>
+                            <td${data[i].desc1} </td>
+                            <td${data[i].time} </td>
+                            <td${data[i].loc_name} </td>
+                            <td${data[i].event_name} </td>
+                            </tr>`
+                            table.innerHTML += row
+            }
+        }
+</script>-->
+
+        
+        
+        
   </head>
   <body>
     <div class="container">
@@ -17,6 +46,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 center">
+                
                 <div class="container">
                         <h3 id="event_name"><b>Event name: </b></h3>
                         <p id="desc1">Event desc: </p>
@@ -36,13 +66,76 @@
                     <p>event description</p>
                     <p>other event stuff</p>
                 </div>
+                <div class="modal-footer">
+                    
+                    
+                    <button onclick="myFunction()">Click me</button>
+                </div>
+
+
             </div>
         </div>
     </div>
     
+    <table id="table" align = "center" border="1px"></table>
+<script>function myFunction() {
+    var list = findEvents(event);
+    //var x = JSON.parse(results);
+    //document.write(results[0].event_ID);
+    //document.write("results");
+    //document.write(x[0]);
     
+            var cols = [];
+             
+            for (var i = 0; i < list.length; i++) {
+                for (var k in list[i]) {
+                    if (cols.indexOf(k) === -1) {
+                         
+                        // Push all keys to the array
+                        cols.push(k);
+                    }
+                }
+            }
+             
+            // Create a table element
+            var table = document.createElement("table");
+             
+            // Create table row tr element of a table
+            var tr = table.insertRow(-1);
+             
+            for (var i = 0; i < cols.length; i++) {
+                 
+                // Create the table header th element
+                var theader = document.createElement("th");
+                theader.innerHTML = cols[i];
+                 
+                // Append columnName to the table row
+                tr.appendChild(theader);
+            }
+             
+            // Adding the data to the table
+            for (var i = 0; i < list.length; i++) {
+                 
+                // Create a new row
+                trow = table.insertRow(-1);
+                for (var j = 0; j < cols.length; j++) {
+                    var cell = trow.insertCell(-1);
+                     
+                    // Inserting the cell at particular place
+                    cell.innerHTML = list[i][cols[j]];
+                }
+            }
+             
+            // Add the newly created table containing json data
+            var el = document.getElementById("table");
+            el.innerHTML = "";
+            el.appendChild(table);
+        
+}</script>
 
-
+    <script src="md5.js"></script>
+    <script src="index.js"></script>
+    <script src="test.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

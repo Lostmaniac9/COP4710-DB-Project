@@ -22,11 +22,43 @@ function login(form, e) {
         //$('#login-modal').modal('toggle');
     }
 }
+
+function findEvents( e){
+    e.preventDefault();
+    e.stopPropagation();
+    let eventID = 0;
+    //document.write('<div>Login successful</div>');
+    list = ApiHandler("FindEvents", JSON.stringify(
+        {
+        }
+    )).results;
+    if(list == undefined){
+        list = [];
+    }
+    return list;
+    document.write("test");
+}
+
+function findEventsA( e){
+    e.preventDefault();
+    e.stopPropagation();
+    let eventID = 0;
+    //document.write('<div>Login successful</div>');
+    list = ApiHandler("FindPubEventsA", JSON.stringify(
+        {
+        }
+    )).results;
+    if(list == undefined){
+        list = [];
+    }
+    return list;
+    document.write("test");
+}
 function signup(form, e) {
     e.preventDefault();
     e.stopPropagation();
     let error = false;
-    document.write("L");
+
     // No username was entered
     if (form.username.value == "") {
         //$("#usernameResult").text("Please enter a username");
@@ -72,3 +104,6 @@ function signup(form, e) {
     // $("#login-modal").modal('toggle');
     // searchContacts("All", "");
 }
+
+
+
