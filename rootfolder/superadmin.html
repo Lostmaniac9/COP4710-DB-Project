@@ -8,8 +8,25 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Superadmin</title>
     
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
   </head>
   <body>
     <div class="container">
@@ -19,30 +36,30 @@
         <div class="row">
             <div class="col-lg-6 center">
                 <div class="container">
-                    <h3 id="event_name"><b>Event name: </b></h3>
-                    <p id="desc1">Event desc: </p>
-                    <p id="time">Event time: </p>
-                    <p id="loc_name">Event loc: </p>
-                    <!-- Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
-                    <button type="button" class="btn btn-primary">Approve</button>
+                    <h3 id="event_name"><b>University Profile</b></h3>
+                    <h4 id="name">bacon</h4>
                     <hr />
                 </div>
             </div>
             <div class="col-lg-6 center">
-                <div class="container">
-                    <h2>Event name</h2>
-                    <p>event description</p>
-                    <p>other event stuff</p>
-                </div>
-                <div class="container">
-                    <h2>Second event name</h2>
-                    <p>event description</p>
-                    <p>other event stuff</p>
-                </div>
+                
                 <div class="modal-footer">
-                    
-                    
-                    <button onclick="myFunction()">Click me</button>
+                    <form>
+                    <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
+                    <div class="form-group">
+                        <label for="formLocSelect">Possible Location Selection</label>
+                        <select class="form-control" id="formLocSelect">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="myFunction()">Select event</button>
+                    <!-- Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
+                    <button type="button" class="btn btn-primary">Approve</button>
+                </form>
                 </div>
             </div>
         </div>
