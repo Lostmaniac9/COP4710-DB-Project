@@ -1,0 +1,63 @@
+@charset "utf-8";
+p strong br {
+}
+#header {
+	top: 0;
+	color: #575151;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: small-caps;
+	font-weight: normal;
+	font-size: large;
+	text-align: center;
+	text-decoration: none;
+	border: medium solid #766565;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+#body {
+	background-color: #CAE1EC;
+}
+.link {
+    display: inline;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-variant: small-caps;
+    margin-right: 50px;
+    margin-left: 50px;
+    text-align: center;
+}
+#img {
+	width: 50px;
+	height: 50px;
+}
+#label {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: small-caps;
+}
+#helpText {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: small-caps;
+}
+#balText {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: large;
+	font-variant: small-caps;
+}
+
+#inputAttr {
+    text-align: center;
+	overflow: hidden;
+    white-space: nowrap;
+	flex-direction: column;
+  	align-items: center;
+}
+#checkboxStyle {
+	margin-left: 17px;
+}
+.col-xs-2 {
+}
