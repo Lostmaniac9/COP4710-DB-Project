@@ -1,0 +1,34 @@
+<html>
+<head>
+    <iframe id = "map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.9116429705427!2d-81.20224858491805!3d28.602427382429692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e7685d6a0a495f%3A0x5fd59b92b3c79bab!2sUniversity%20of%20Central%20Florida!5e0!3m2!1sen!2sus!4v1649777061172!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+<script language="javascript" type="text/javascript">
+    var t1 = 28.60242058176763;
+    var t2 = -81.2000437134752;
+    function test(){
+        document.getElementById('map').src = "https://maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+    }
+
+    function Button1_onclick() {
+        window.top.location.href='https://maps.google.com/maps?q=28.60242058176763, -81.2000437134752&hl=es;z=14&amp;output=embed'
+        //var url = "https://maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+        //document.getElementById('map').setAttribute("src", url); // = "//maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+       //parent.test();
+    }
+
+</script>
+</head>
+<body>
+<h2>Gecoding Demo JavaScript: </h2>
+
+    <input id="Button1" type="button" value="Find" onclick=" Button2_onclick()" />
+
+    <a href="UCFGym.html"><button>Go To Login</button></a>
+
+<script src="md5.js"></script>
+<script src="index.js"></script>
+<script src="test.js"></script>
+<script src="map.js"></script>
+</body>
+
+</html>
