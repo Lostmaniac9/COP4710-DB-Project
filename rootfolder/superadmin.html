@@ -62,7 +62,18 @@
     }
 
 
+function hmmm(){
+    var list = findUnapproved(event);
+        //document.write(list[0].loc_name)
 
+        var ele = document.getElementById('sel');
+        for (var i = 0; i < list.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            ele.innerHTML = ele.innerHTML +
+                '<option value="' + list[i]['ID'] + '">' + list[i]['event_ID'] + '</option>';
+        }
+        myFunction1();
+}
  
 
 function teste(){
@@ -80,68 +91,23 @@ function teste(){
     //document.write(t1);
     //document.write("test");
     //test = ele.options[ele.selectedIndex].text;
-    alert("Event approved!");
+    
        var hold = approve(event, test);//document.write("test");
        if(hold == ""){
-           document.write("event approved");
+        alert("Event approved!");
 
        }
        else{
-           document.write("something went wrong");
+        alert("Something went wrong!");
        }
     }
 
-</script>
-  </head>
-  <body>
-    <div class="container">
-        <h1>Welcome, Superadministrator</h1>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 center">
-                <div class="container">
-                    <h3 id="event_name"><b>University Profile</b></h3>
-                    <h4 id="name">bacon</h4>
-                    <hr />
-                    <form id="uni_profile">
-                        <div class="form-group">
-                            <label for="formName">Name</label>
-                            <input type="text" class="form-control" id="uniName" placeholder="Enter university name">
-                        </div>
-                        <button type="submit" form="uni_profile" class="btn btn-primary">Create university</button>
-                    </form>
-                    <hr />
-                    <h3 id="event_name"><b>Unapproved Events</b></h3>
-                    <button type="button" class="btn btn-primary">Show events</button>
-                    <hr />
-                </div>
-            </div>
-            <div class="col-lg-6 center">
-                
-                <div class="modal-footer">
-                    
-                    <form>
-                        <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
-                        <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
-                        <select id="sel" onchange="myFunction(this)">
-                            <option value="">-- Select --</option>
-                        </select>
-                        <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <table id="table" align = "center" border="1px"></table>
-<script>function myFunction(ele) {
+function myFunction1() {
     //msg = document.getElementById('msg');
-    test = ele.options[ele.selectedIndex].text;
+    //test = ele.options[ele.selectedIndex].text;
     //document.getElementById("msg").innerHTML = test;
 //document.write(test);
-var list = findSpecific(event, test);
+var list = findUnapproved(event);
 //t1 = list[0].longitude;
 // document.getElementById("t1").innerHTML =
 //            "t1 = "+t1;
@@ -199,6 +165,122 @@ var list = findSpecific(event, test);
         var el = document.getElementById("table");
         el.innerHTML = "";
         el.appendChild(table);
+    
+}
+
+</script>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Welcome, Superadministrator</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 center">
+                <div class="container">
+                    <h3 id="event_name"><b>University Profile</b></h3>
+                    <h4 id="name">bacon</h4>
+                    <hr />
+                    <form id="uni_profile">
+                        <div class="form-group">
+                            <label for="formName">Name</label>
+                            <input type="text" class="form-control" id="uniName" placeholder="Enter university name">
+                        </div>
+                        <button type="submit" form="uni_profile" class="btn btn-primary">Create university</button>
+                    </form>
+                    <hr />
+                    <h3 id="event_name"><b>Unapproved Events</b></h3>
+                    <button type="button" class="btn btn-primary"  onClick = "hmmm()">Show events</button>
+                    <hr />
+                </div>
+            </div>
+            <div class="col-lg-6 center">
+                
+                <div class="modal-footer">
+                    
+                    <form>
+                    <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
+                    <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
+        <select id="sel" onchange="myFunction(this)">
+        <option value="">-- Select --</option>
+    </select>
+                    <div class="form-group">
+                     
+                    </div>
+                    <!--<button class="btn btn-primary" onclick="myFunction()">Select event</button>
+                     Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
+                    <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table id="table" align = "center" border="1px"></table>
+<script>function myFunction(ele) {
+    //msg = document.getElementById('msg');
+    test = ele.options[ele.selectedIndex].text;
+    //document.getElementById("msg").innerHTML = test;
+//document.write(test);
+var list = findSpecific(event, test);
+//t1 = list[0].longitude;
+// document.getElementById("t1").innerHTML =
+//            "t1 = "+t1;
+//document.write(t1);
+//t2 = list[0].latitude;
+// document.getElementById("t2").innerHTML =
+//            "t2 = "+t2;
+//var x = JSON.parse(results);
+//document.write(list[0].longitude);
+//document.write("results");
+//document.write(x[0]);
+
+        // var cols = [];
+         
+        // for (var i = 0; i < list.length; i++) {
+        //     for (var k in list[i]) {
+        //         if (cols.indexOf(k) === -1) {
+                     
+        //             // Push all keys to the array
+        //             cols.push(k);
+        //         }
+        //     }
+        // }
+         
+        // // Create a table element
+        // var table = document.createElement("table");
+         
+        // // Create table row tr element of a table
+        // var tr = table.insertRow(-1);
+         
+        // for (var i = 0; i < cols.length; i++) {
+             
+        //     // Create the table header th element
+        //     var theader = document.createElement("th");
+        //     theader.innerHTML = cols[i];
+             
+        //     // Append columnName to the table row
+        //     tr.appendChild(theader);
+        // }
+         
+        // // Adding the data to the table
+        // for (var i = 0; i < list.length; i++) {
+             
+        //     // Create a new row
+        //     trow = table.insertRow(-1);
+        //     for (var j = 0; j < cols.length; j++) {
+        //         var cell = trow.insertCell(-1);
+                 
+        //         // Inserting the cell at particular place
+        //         cell.innerHTML = list[i][cols[j]];
+        //     }
+        // }
+         
+        // // Add the newly created table containing json data
+        // var el = document.getElementById("table");
+        // el.innerHTML = "";
+        // el.appendChild(table);
     
 }
 </script>
