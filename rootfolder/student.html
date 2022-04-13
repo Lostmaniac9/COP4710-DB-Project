@@ -58,8 +58,12 @@
             </div>
             <div class="col-lg-6 center">
 
-                <!-- form entry stuff, don't forget to remove collecting a timestamp on comments in the php since we don't grab that, unless you want me to add it in which case I can try-->
                 <form id="formComment">
+
+                    <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
+                        <select id="sel" onchange="myFunction(this)">
+                            <option value="">-- Select --</option>
+                        </select>
                   <div class="form-group">
                     <label for="text">Enter comment...</label>
                     <textarea class="form-control" id="text" rows="3"></textarea>
@@ -76,7 +80,7 @@
                   </select>
 
                   <button type="submit" form="formComment" class="btn btn-primary my-1">Add Comment</button>
-                  <!-- put this here just in case you want to use that php script you made for it -->
+                  <button type="submit" form="formComment" class="btn btn-primary my-1">Edit Comment</button>
                   <button type="submit" form="formComment" class="btn btn-danger my-1">Delete Comment</button>
                 </form>
 

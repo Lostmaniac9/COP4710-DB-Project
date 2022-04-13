@@ -122,18 +122,13 @@ function teste(){
                 <div class="modal-footer">
                     
                     <form>
-                    <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
-                    <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
-        <select id="sel" onchange="myFunction(this)">
-        <option value="">-- Select --</option>
-    </select>
-                    <div class="form-group">
-                     
-                    </div>
-                    <!--<button class="btn btn-primary" onclick="myFunction()">Select event</button>
-                     Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
-                    <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
-                </form>
+                        <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
+                        <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
+                        <select id="sel" onchange="myFunction(this)">
+                            <option value="">-- Select --</option>
+                        </select>
+                        <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
+                    </form>
                 </div>
             </div>
         </div>
