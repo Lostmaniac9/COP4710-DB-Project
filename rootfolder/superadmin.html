@@ -179,7 +179,7 @@ var list = findUnapproved(event);
             <div class="col-lg-6 center">
                 <div class="container">
                     <h3 id="event_name"><b>University Profile</b></h3>
-                    <h4 id="name">bacon</h4>
+                    <h4 id="name"></h4>
                     <hr />
                     <form id="uni_profile">
                         <div class="form-group">
@@ -196,28 +196,25 @@ var list = findUnapproved(event);
             </div>
             <div class="col-lg-6 center">
                 
-                <div class="modal-footer">
-                    
-                    <form>
-                    <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
-                    <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
-        <select id="sel" onchange="myFunction(this)">
-        <option value="">-- Select --</option>
-    </select>
-                    <div class="form-group">
-                     
-                    </div>
-                    <!--<button class="btn btn-primary" onclick="myFunction()">Select event</button>
-                     Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
-                    <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
-                </form>
-                </div>
+                
             </div>
         </div>
     </div>
 
 
     <table id="table" align = "center" border="1px"></table>
+    <div class="modal-footer">
+                    
+        <form>
+            <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
+            <select id="sel" onchange="myFunction(this)">
+            <option value="">-- Select --</option>
+            </select>
+            <!--<button class="btn btn-primary" onclick="myFunction()">Select event</button>
+            Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
+            <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
+        </form>
+    </div>
 <script>function myFunction(ele) {
     //msg = document.getElementById('msg');
     test = ele.options[ele.selectedIndex].text;
