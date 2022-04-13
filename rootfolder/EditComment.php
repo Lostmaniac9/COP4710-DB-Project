@@ -5,13 +5,15 @@
     $inData = getRequestInfo();
 
     # Contact Book User registration information stored as variables.
-    #$event_ID = date("Y/m/d");
     $com_UID = $inData["com_UID"];
-    $timestamp = date('H:i');
     $com_event_ID = $inData["com_event_ID"];
+    #$time =  $inData["time"];         #date('m-d-Y H:i');
+    #$loc_name = $inData["loc_name"];
+    #$event_name = $inData["event_name"];
     $text = $inData["text"];
     $rating = $inData["rating"];
-    #$timestamp = $inData["latitude"];
+    #$pub_admin_ID = $inData["pub_admin_ID"];
+    #$pub_superadmin_ID = "1";
     
     #$Email = $inData["Email"];
 
@@ -26,21 +28,17 @@
     # Query the database to insert the registered user into the Users table if
 	# validation constraints are met or else return an error
     else
-    { 
-            $stmt = $conn->prepare("INSERT INTO comments (  com_UID,com_event_ID, text, timestamp, rating) VALUES (?, ?, ?, ?,?)");
-            $stmt->bind_param("sssss",  $com_UID,$com_event_ID, $text, $timestamp, $rating);
-            $stmt->execute();
-	        #$sid = $stmt->insert_id;   #check this one need to get UID
-	        returnWithInfo($com_UID, $com_event_ID );
-            $stmt->close();
-            $conn->close();
-        
-			
-    }	
-
-function returnWithInfo( $com_UID, $com_event_ID )
+    { #UPDATE public_events SET approved = '1' WHERE public_events.event_ID = ?
+        $stmt = $conn->prepare("UPDATE comments SET text = ? WHERE comments.com_UID = ? AND comments.com_event_ID = ?");
+        $stmt->bind_param("ssss",  $text, $com_UID, $com_event_ID, $rating);
+        $stmt->execute();
+        $stmt->close();
+        returnWithError("Update Successful");
+	}
+    
+function returnWithInfo( $sid )
 	{
-		$retValue = '{"User": ' . $com_UID . ',"Commented on Event":' . $com_event_ID . ',"error":""}';
+		$retValue = '{"EventID":' . $sid . ',"error":""}';  
 		sendResultInfoAsJson( $retValue );
 	}
 

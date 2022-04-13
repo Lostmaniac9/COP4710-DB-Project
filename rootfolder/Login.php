@@ -41,7 +41,7 @@
 		# obtain the login information based on the input parameters and send information
 		# as JSON element.
 		function returnWithInfo( $username, $UID )
-		{
+		{	
 			$retValue = '{"ID":' . $UID . ',"Welcome,":"' . $username . '","error":""}';
 			sendResultInfoAsJson( $retValue );
 		}

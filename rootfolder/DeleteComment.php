@@ -7,11 +7,7 @@
     # Contact Book User registration information stored as variables.
     #$event_ID = date("Y/m/d");
     $com_UID = $inData["com_UID"];
-    $timestamp = date('H:i');
     $com_event_ID = $inData["com_event_ID"];
-    $text = $inData["text"];
-    $rating = $inData["rating"];
-    #$timestamp = $inData["latitude"];
     
     #$Email = $inData["Email"];
 
@@ -26,21 +22,18 @@
     # Query the database to insert the registered user into the Users table if
 	# validation constraints are met or else return an error
     else
-    { 
-            $stmt = $conn->prepare("INSERT INTO comments (  com_UID,com_event_ID, text, timestamp, rating) VALUES (?, ?, ?, ?,?)");
-            $stmt->bind_param("sssss",  $com_UID,$com_event_ID, $text, $timestamp, $rating);
-            $stmt->execute();
-	        #$sid = $stmt->insert_id;   #check this one need to get UID
-	        returnWithInfo($com_UID, $com_event_ID );
-            $stmt->close();
-            $conn->close();
-        
-			
-    }	
-
+    {
+        $stmt = $conn->prepare("DELETE FROM comments WHERE `com_UID` = ? AND `com_event_ID` = ?");
+        $stmt->bind_param("ss", $com_UID, $com_event_ID);
+        $stmt->execute();
+        #returnWithInfo( $row['com_UID'],  $row['com_event_ID'] );
+        returnWithError("Deletion Successful");
+        $stmt->close();
+        $conn->close();
+    }
 function returnWithInfo( $com_UID, $com_event_ID )
 	{
-		$retValue = '{"User": ' . $com_UID . ',"Commented on Event":' . $com_event_ID . ',"error":""}';
+		$retValue = '{"User": ' . $com_UID . ',"Deleted comment on Event":' . $com_event_ID . ',"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 

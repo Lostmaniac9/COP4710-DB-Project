@@ -2,7 +2,7 @@
 	# server/database information
 	$serverName = "localhost";
 	$dBUsername = "root";
-	$dBPassword = "";
+	$dBPassword = "AchillesHeel";
 	$dBName = "project_db";
 
 	#establish connection to MySQL server

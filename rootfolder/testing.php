@@ -1,20 +1,20 @@
 <?php
-    require_once 'DBInfo.php';
+    require_once 'testing2.php';
     require_once 'functions.php';
 
     $inData = getRequestInfo();
 
     # Contact Book User registration information stored as variables.
-    #$DateCreated = date("Y/m/d");
-    #$FirstName = $inData["FirstName"];
-    #$LastName = $inData["LastName"];
-    $username = $inData["username"];
-    $password = $inData["password"];
-    
-    #$Email = $inData["Email"];
+    $DateCreated = date("Y/m/d");
+    $FirstName = $inData["FirstName"];
+    $LastName = $inData["LastName"];
+    $UserName = $inData["UserName"];
+    $Password = $inData["Password"];
+    $Email = $inData["Email"];
 
 
-    #$conn = $db;
+    # establish connection to MySQL server to access database and handle failed
+    # connection error case
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if( $conn->connect_error )
     {
@@ -25,23 +25,23 @@
 	# validation constraints are met or else return an error
     else
     {
-		$stmt = $conn->prepare("SELECT * FROM admins WHERE username =?");
-        $stmt->bind_param("s", $username);
+		$stmt = $conn->prepare("SELECT * FROM Users WHERE UserName =?");
+        $stmt->bind_param("s", $UserName);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $stmt->close();
 
-        if (isset($row['username']))
+        if ($UserName == $row["UserName"])
 		{
 			returnWithError("Username already exists.");
 		}
 		else
         {
-			$stmt = $conn->prepare("INSERT INTO admins ( username, password) VALUES (?, ?)");
-            $stmt->bind_param("ss", $username, $password);
+			$stmt = $conn->prepare("INSERT INTO Users (DateCreated, FirstName, LastName, UserName, Password, Email) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $DateCreated, $FirstName, $LastName, $UserName, $Password, $Email);
             $stmt->execute();
-	   $sid = $stmt->insert_id;   #check this one need to get UID
+	   $sid = $stmt->insert_id;
 	    returnWithInfo($sid);
             $stmt->close();
             $conn->close();
