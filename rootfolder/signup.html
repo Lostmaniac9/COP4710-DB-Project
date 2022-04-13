@@ -26,57 +26,47 @@
 		<script src="/__/firebase/init.js"></script>
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-			<nav class="navbar navbar-light bg-light">
-			  <a class="navbar-brand">
-				<img src="university.png" width="30" height="30" class="d-inline-block align-top" alt="">
-				University
-			  </a>
-			</nav>
-		<div class="h1 mx-sm-3">
-			Create your account!
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-3 center">
+					<div class="h1 mx-sm-3">
+						Create your account!
+					</div>
+					<!-- TODO: Route Login and Signup buttons to point to pages -->
+					<form>
+					<div class="form-group mx-sm-3">
+						<label>Name</label>
+						<input type="text" class="form-control col-xs-2" name="usernameTextField" placeholder="Enter name...">
+						<small id="nameHelp" class="form-text text-muted">Enter name...</small>
+					</div>
+					<div class="form-group mx-sm-3">
+						<label>Password</label>
+						<input type="text" class="form-control  col-xs-2" name="passwordTextField" placeholder="Password">
+						<small id="passHelp" class="form-text text-muted">Enter password.</small>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="loginType" id="superadminType" value="superadmin">
+						<label class="form-check-label" for="exampleRadios1">Public</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="loginType" id="adminType" value="admin">
+						<label class="form-check-label" for="exampleRadios2">Private</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="loginType" id="studentType" value="student">
+						<label class="form-check-label" for="exampleRadios3">RSO</label>
+					<!--
+					<div class="form-group mx-sm-3">
+							<%= errorMsg %>
+					</div>
+					-->
+					<hr />
+					<button type="submit" class="btn btn-primary mx-sm-3">Create Account</button>
+					</form>
+				</div>
+				<div class="col-lg-9 center"></div>
+			</div>
 		</div>
-		<!-- TODO: Route Login and Signup buttons to point to pages -->
-		<form>
-		  <div class="form-group mx-sm-3">
-			<label>Name</label>
-			<input type="text" class="form-control col-xs-2" name="usernameTextField" placeholder="Enter name...">
-			<small id="nameHelp" class="form-text text-muted">Enter name...</small>
-		  </div>
-		  <div class="form-group mx-sm-3">
-			<label>Password</label>
-			<input type="text" class="form-control  col-xs-2" name="passwordTextField" placeholder="Password">
-			  <small id="passHelp" class="form-text text-muted">Enter password.</small>
-		  </div>
-		  <div class="form-group mx-sm-3">
-			<label>Account Type:</label>
-		  </div>
-		  <div class="form-check" id="checkboxStyle">
-			<input type="checkbox" class="form-check-input">
-			<label class="form-check-label" for="exampleCheck1">Student</label>
-		  </div>
-		  <div class="form-check" id="checkboxStyle">
-			<input type="checkbox" class="form-check-input">
-			<label class="form-check-label" for="exampleCheck1">Admin</label>
-		  </div>
-		  <div class="form-check" id="checkboxStyle">
-			<input type="checkbox" class="form-check-input">
-			<label class="form-check-label" for="exampleCheck1">Super Admin</label>
-		  </div>
-		  <div class="dropdown">
-			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Dropdown button
-			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item" href="#">Action</a>
-				<a class="dropdown-item" href="#">Another action</a>
-				<a class="dropdown-item" href="#">Something else here</a>
-		  </div>
-		  <!--
-		  <div class="form-group mx-sm-3">
-				<%= errorMsg %>
-		  </div>
-		  -->
-		  <button type="submit" class="btn btn-primary mx-sm-3">Create Account</button>
-		</form>
 	</body>
 </html>
