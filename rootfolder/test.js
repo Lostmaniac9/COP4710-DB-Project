@@ -15,17 +15,21 @@ function login(form, e) {
     if (userId < 1 || userId === undefined) {
         //$("#loginResult").text("User/Password combination incorrect");
         //document.write('<div>Testing</div>');
-        document.write("L");
+        //document.write("L");
+        userId = 0;
+        return userId;
     } else {
-        document.write('<div>Login successful</div>');
-        document.write(userId);
+        //document.write('<div>Login successful</div>');
+        //document.write(userId);
         //$('#login-modal').modal('toggle');
+        return userId;
     }
 }
 
 function findEvents( e){
     e.preventDefault();
     e.stopPropagation();
+    
     let eventID = 0;
     //document.write('<div>Login successful</div>');
     list = ApiHandler("FindEvents", JSON.stringify(
@@ -35,8 +39,47 @@ function findEvents( e){
     if(list == undefined){
         list = [];
     }
+    document.write("test");
     return list;
     document.write("test");
+}
+
+function findUnapproved( e){
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let eventID = 0;
+    //document.write('<div>Login successful</div>');
+    list = ApiHandler("FindUnapproved", JSON.stringify(
+        {
+        }
+    )).results;
+    if(list == undefined){
+        list = [];
+    }
+    //document.write("test");
+    return list;
+    document.write("test");
+}
+
+function findSpecific( e, sel){
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let eventID = 0;
+    //document.write(sel);
+    //document.write('<div>Login successful</div>');
+    list = ApiHandler("FindSpecificEvent", JSON.stringify(
+        {
+            event_ID: sel
+        }
+    )).results;
+    if(list == undefined){
+        list = [];
+    }
+    //document.write("test");
+    return list;
+    
 }
 
 function findCoords( e, sel){
@@ -58,6 +101,21 @@ function findCoords( e, sel){
     document.write("test");
 }
 
+function approve(e, sel){
+    e.preventDefault();
+    e.stopPropagation();
+    //document.write(sel);
+    let test = "test";
+    //document.write('<div>Login successful</div>');
+    test = ApiHandler("ApproveEvent", JSON.stringify(
+        {
+            event_ID: sel
+        }
+    )).error;
+    //document.write(testing);
+    //document.write("testing");
+    return test;
+}
 function findLocations( e){
     e.preventDefault();
     e.stopPropagation();
@@ -133,7 +191,9 @@ function signup(form, e) {
         username: form.username.value,
         password: form.password.value
     })).newUserID;
-    document.write("We gucci");
+
+    return newUserID;
+    //document.write("We gucci");
     // Log in new user
     // $("#signup-modal").modal('toggle');
     // saveCookie();
