@@ -39,6 +39,42 @@ function findEvents( e){
     document.write("test");
 }
 
+function findCoords( e, sel){
+    e.preventDefault();
+    e.stopPropagation();
+    //document.write(sel);
+    let eventID = 0;
+    //document.write('<div>Login successful</div>');
+    list = ApiHandler("FindCoords", JSON.stringify(
+        {
+            loc_name: sel
+        }
+    )).results;
+    if(list == undefined){
+        list = [];
+    }//document.write(testing);
+    //document.write("testing");
+    return list;
+    document.write("test");
+}
+
+function findLocations( e){
+    e.preventDefault();
+    e.stopPropagation();
+    let eventID = 0;
+    //document.write('<div>Login successful</div>');
+    list = ApiHandler("FindLocations", JSON.stringify(
+        {
+        }
+    )).results;
+    if(list == undefined){
+        list = [];
+    }
+    
+    return list;
+    document.write("test");
+}
+
 function findEventsA( e){
     e.preventDefault();
     e.stopPropagation();
