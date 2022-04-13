@@ -27,6 +27,70 @@
           background-color: #dddddd;
         }
         </style>
+
+<script language="javascript" type="text/javascript">
+    var t1 =0 ;
+    var t2 =0;
+    var msg;
+
+
+    function Button1_onclick() {
+        window.top.location.href='https://maps.google.com/maps?q=28.60242058176763, -81.2000437134752&hl=es;z=14&amp;output=embed'
+        //var url = "https://maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+        //document.getElementById('map').setAttribute("src", url); // = "//maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+       //parent.test();
+    }
+
+    function populateSelect() {
+        // THE JSON ARRAY.
+        var list = findUnapproved(event);
+        //document.write(list[0].loc_name)
+
+        var ele = document.getElementById('sel');
+        for (var i = 0; i < list.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            ele.innerHTML = ele.innerHTML +
+                '<option value="' + list[i]['ID'] + '">' + list[i]['event_ID'] + '</option>';
+        }
+    }
+
+    function show(ele) {
+        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+        msg = document.getElementById('msg');
+        msg.innerHTML = 'Selected Location: <b>' + ele.options[ele.selectedIndex].text + '</b> </br>' ;
+            //+ 'ID: <b>' + ele.value + '</b>';
+    }
+
+
+
+ 
+
+function teste(){
+    //document.write(t1);
+        if(t1 == null){
+            document.write("testing");
+        }
+        else{
+            //document.write("testing111");
+            Button2_onclick(t1,t2);
+        }
+    }
+
+    function approve1(){
+    //document.write(t1);
+    //document.write("test");
+    //test = ele.options[ele.selectedIndex].text;
+       var hold = approve(event, test);//document.write("test");
+       if(hold == ""){
+           document.write("event approved");
+
+       }
+       else{
+           document.write("something went wrong");
+       }
+    }
+
+</script>
   </head>
   <body>
     <div class="container">
@@ -46,27 +110,27 @@
                         </div>
                         <button type="submit" form="uni_profile" class="btn btn-primary">Create university</button>
                     </form>
+                    <hr />
+                    <h3 id="event_name"><b>Unapproved Events</b></h3>
+                    <hr />
                 </div>
             </div>
             <div class="col-lg-6 center">
                 
                 <div class="modal-footer">
+                    
                     <form>
                     <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
-                    <button type="button" class="btn btn-primary">Populate Dropdown</button>
+                    <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
+        <select id="sel" onchange="myFunction(this)">
+        <option value="">-- Select --</option>
+    </select>
                     <div class="form-group">
-                        <label for="formLocSelect">Select public event IDs</label>
-                        <select class="form-control" id="formLocSelect">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        </select>
+                     
                     </div>
-                    <button class="btn btn-primary" onclick="myFunction()">Select event</button>
-                    <!-- Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
-                    <button type="button" class="btn btn-primary">Approve</button>
+                    <!--<button class="btn btn-primary" onclick="myFunction()">Select event</button>
+                     Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
+                    <button type="button" class="btn btn-primary" onClick = "approve1()">Approve</button>
                 </form>
                 </div>
             </div>
@@ -75,65 +139,76 @@
 
 
     <table id="table" align = "center" border="1px"></table>
-<script>function myFunction() {
-    var list = findEventsA(event);
-    //var x = JSON.parse(results);
-    //document.write(results[0].event_ID);
-    //document.write("results");
-    //document.write(x[0]);
-    
-            var cols = [];
-             
-            for (var i = 0; i < list.length; i++) {
-                for (var k in list[i]) {
-                    if (cols.indexOf(k) === -1) {
-                         
-                        // Push all keys to the array
-                        cols.push(k);
-                    }
-                }
-            }
-             
-            // Create a table element
-            var table = document.createElement("table");
-             
-            // Create table row tr element of a table
-            var tr = table.insertRow(-1);
-             
-            for (var i = 0; i < cols.length; i++) {
-                 
-                // Create the table header th element
-                var theader = document.createElement("th");
-                theader.innerHTML = cols[i];
-                 
-                // Append columnName to the table row
-                tr.appendChild(theader);
-            }
-             
-            // Adding the data to the table
-            for (var i = 0; i < list.length; i++) {
-                 
-                // Create a new row
-                trow = table.insertRow(-1);
-                for (var j = 0; j < cols.length; j++) {
-                    var cell = trow.insertCell(-1);
+<script>function myFunction(ele) {
+    //msg = document.getElementById('msg');
+    test = ele.options[ele.selectedIndex].text;
+    //document.getElementById("msg").innerHTML = test;
+//document.write(test);
+var list = findSpecific(event, test);
+//t1 = list[0].longitude;
+// document.getElementById("t1").innerHTML =
+//            "t1 = "+t1;
+//document.write(t1);
+//t2 = list[0].latitude;
+// document.getElementById("t2").innerHTML =
+//            "t2 = "+t2;
+//var x = JSON.parse(results);
+//document.write(list[0].longitude);
+//document.write("results");
+//document.write(x[0]);
+
+        var cols = [];
+         
+        for (var i = 0; i < list.length; i++) {
+            for (var k in list[i]) {
+                if (cols.indexOf(k) === -1) {
                      
-                    // Inserting the cell at particular place
-                    cell.innerHTML = list[i][cols[j]];
+                    // Push all keys to the array
+                    cols.push(k);
                 }
             }
+        }
+         
+        // Create a table element
+        var table = document.createElement("table");
+         
+        // Create table row tr element of a table
+        var tr = table.insertRow(-1);
+         
+        for (var i = 0; i < cols.length; i++) {
              
-            // Add the newly created table containing json data
-            var el = document.getElementById("table");
-            el.innerHTML = "";
-            el.appendChild(table);
-        
-}</script>
+            // Create the table header th element
+            var theader = document.createElement("th");
+            theader.innerHTML = cols[i];
+             
+            // Append columnName to the table row
+            tr.appendChild(theader);
+        }
+         
+        // Adding the data to the table
+        for (var i = 0; i < list.length; i++) {
+             
+            // Create a new row
+            trow = table.insertRow(-1);
+            for (var j = 0; j < cols.length; j++) {
+                var cell = trow.insertCell(-1);
+                 
+                // Inserting the cell at particular place
+                cell.innerHTML = list[i][cols[j]];
+            }
+        }
+         
+        // Add the newly created table containing json data
+        var el = document.getElementById("table");
+        el.innerHTML = "";
+        el.appendChild(table);
     
+}
+</script>
     <script src="md5.js"></script>
     <script src="index.js"></script>
     <script src="test.js"></script>
-
+    <script src="map.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
