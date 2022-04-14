@@ -1,5 +1,5 @@
-let userId = 0;
-let remember = true;
+var userId = 0;
+var remember = true;
 
 function login(form, e) {
     e.preventDefault();
@@ -11,25 +11,30 @@ function login(form, e) {
             password: form.password.value
         }
     )).UID;
-    
+
     if (userId < 1 || userId === undefined) {
         //$("#loginResult").text("User/Password combination incorrect");
         //document.write('<div>Testing</div>');
-        //document.write("L");
-        userId = 0;
-        return userId;
+        document.write("L");
+        alert('Credentials invalid.');
+    } if (form.loginType.value == "student") {
+        window.location.assign("student.html");
+    } else if (form.loginType.value == "admin") {
+        window.location.assign("admin.html");
+    } else if (form.loginType.value == "superadmin") {
+        window.location.assign("superadmin.html");
     } else {
-        //document.write('<div>Login successful</div>');
-        //document.write(userId);
+        document.write('<div>Login successful</div>');
+        document.write(userId);
         //$('#login-modal').modal('toggle');
-        return userId;
+        alert("Please select a role.");
     }
 }
 
 function findEvents( e){
     e.preventDefault();
     e.stopPropagation();
-    
+
     let eventID = 0;
     //document.write('<div>Login successful</div>');
     list = ApiHandler("FindEvents", JSON.stringify(
@@ -47,7 +52,7 @@ function findEvents( e){
 function findUnapproved( e){
     e.preventDefault();
     e.stopPropagation();
-    
+
     let eventID = 0;
     //document.write('<div>Login successful</div>');
     list = ApiHandler("FindUnapproved", JSON.stringify(
@@ -65,7 +70,7 @@ function findUnapproved( e){
 function findSpecific( e, sel){
     e.preventDefault();
     e.stopPropagation();
-    
+
     let eventID = 0;
     //document.write(sel);
     //document.write('<div>Login successful</div>');
@@ -79,7 +84,7 @@ function findSpecific( e, sel){
     }
     //document.write("test");
     return list;
-    
+
 }
 
 function findCoords( e, sel){
@@ -128,7 +133,7 @@ function findLocations( e){
     if(list == undefined){
         list = [];
     }
-    
+
     return list;
     document.write("test");
 }
@@ -156,7 +161,7 @@ function signup(form, e) {
     // No username was entered
     if (form.username.value == "") {
         //$("#usernameResult").text("Please enter a username");
-        document.write("L");
+        alert("Please enter a username.");
         error = true;
     } else {
         //$("#usernameResult").text("");
@@ -175,10 +180,14 @@ function signup(form, e) {
     // No password was entered or passwords do not match
     if (form.password.value == "") {
        // $("#passwordResult").text("Please enter a password");
-        error = true;document.write("???");
+       alert("Please enter a password.");
+        error = true;
     } else if (form.password.value != form.passwordConfirm.value) {
         //$("#passwordResult").text("Passwords do not match");
         document.write("?x?");
+        error = true;
+    } else if (form.loginType.value == "") {
+        alert("Please select an account type.");
         error = true;
     } else {
         //$("#passwordResult").text("");
@@ -190,7 +199,19 @@ function signup(form, e) {
     userId = apiHandler("Signup", JSON.stringify({
         username: form.username.value,
         password: form.password.value
-    })).newUserID;
+     })).newUserID;
+
+    if (form.loginType.value == "student") {
+        window.location.assign("student.html");
+    } else if (form.loginType.value == "admin") {
+        window.location.assign("admin.html");
+    } else if (form.loginType.value == "superadmin") {
+        window.location.assign("superadmin.html");
+    } else {
+        alert("Please choose a role.");
+    }
+
+
 
     return newUserID;
     //document.write("We gucci");
@@ -200,6 +221,3 @@ function signup(form, e) {
     // $("#login-modal").modal('toggle');
     // searchContacts("All", "");
 }
-
-
-
