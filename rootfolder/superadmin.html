@@ -168,6 +168,16 @@ var list = findUnapproved(event);
     
 }
 
+function dd(form,event){
+    
+   var name1 = createUni(form,event);
+   if(name1 != undefined){
+       alert("University Successfully Made!");
+    name = document.getElementById('name');
+   document.getElementById("name").innerHTML = name1;
+   }
+   
+}
 </script>
   </head>
   <body>
@@ -178,10 +188,10 @@ var list = findUnapproved(event);
         <div class="row">
             <div class="col-lg-6 center">
                 <div class="container">
-                    <h3 id="event_name"><b>University Profile</b></h3>
+                    <h3 id="event_name"><b>University Attending:</b></h3><p id="msg"></p>
                     <h4 id="name"></h4>
                     <hr />
-                    <form id="uni_profile" onSubmit="createUni(this, event)">
+                    <form id="uni_profile" onSubmit="dd(this, event)">
                         <div class="form-group">
                             <label for="formName">Name</label>
                             <input type="text" class="form-control" id="uniName" placeholder="Enter university name">

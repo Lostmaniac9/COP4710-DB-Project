@@ -1,6 +1,7 @@
 let userId=0;
 let remember = true;
 
+
 function login(form, e) {
     e.preventDefault();
     e.stopPropagation();
@@ -183,20 +184,39 @@ function findLocations( e){
 function createUni(form, e){
     e.preventDefault();
     e.stopPropagation();
+    let t = "";
+    
     //let eventID = 0;
     //document.write('<div>Login successful</div>');
     //document.write(userId);
-    document.write(userId);
-    list = ApiHandler("CreateUni", JSON.stringify(
+    //document.write(userId);
+    //document.write(form.uniName.value);
+
+    if (form.uniName.value == "") {
+        //$("#usernameResult").text("Please enter a username");
+        alert('University Name Empty');
+        t = "dd";
+        return;
+    } 
+
+    t = ApiHandler("CreateUni", JSON.stringify(
         {
-            uni_superadmin_ID: userId,
-            name: form.uniName
+            uni_superadmin_ID: 2, //userId,
+            name: form.uniName.value
 
         }
-    )).uniID;
-        document.write("hellooo");
-    return form.uniName;
-    document.write("test");
+    )).error;
+
+    //document.write(t);
+    if(t == ""){
+        return form.uniName.value;
+    }
+    else{
+        alert("You've already made a University or the Unversity name is already taken.");
+    }
+        //document.write("hellooo");
+    
+    
 }
 
 function findEventsA( e){
