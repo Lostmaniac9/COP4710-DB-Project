@@ -25,14 +25,22 @@
 	# validation constraints are met or else return an error
     else
     {
-		$stmt = $conn->prepare("SELECT * FROM admins WHERE username =?");
-        $stmt->bind_param("s", $username);
+		$stmt = $conn->prepare("SELECT * FROM admins WHERE username =? OR password =?");
+        $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $stmt->close();
 
-        if (isset($row['username']))
+        if (isset($row['username']) && isset($row['password']))
+		{
+			returnWithError("Username and Password already exists.");
+		}
+        else if (isset($row['password']))
+		{
+			returnWithError("Password already exists.");
+		}
+        else if (isset($row['username'] ))
 		{
 			returnWithError("Username already exists.");
 		}
