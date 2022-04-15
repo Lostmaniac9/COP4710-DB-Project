@@ -40,7 +40,6 @@
             $searchResult .= '"com_UID" : "' . $row["com_UID"] . '", ';
             $searchResult .= '"com_event_ID" : "' . $row["com_event_ID"] . '", ';
             $searchResult .= '"text" : "' . $row["text"] . '", ';
-            $searchResult .= '"timestamp" : "' . $row["timestamp"] . '", ';
             $searchResult .= '"rating" : "' . $row["rating"] . '" ';
             $searchResult .= '}';
             $resultCount++;
@@ -57,7 +56,6 @@
                     $searchResult .= '"com_UID" : "' . $row["com_UID"] . '", ';
                     $searchResult .= '"com_event_ID" : "' . $row["com_event_ID"] . '", ';
                     $searchResult .= '"text" : "' . $row["text"] . '", ';
-                    $searchResult .= '"timestamp" : "' . $row["timestamp"] . '", ';
                     $searchResult .= '"rating" : "' . $row["rating"] . '" ';
                 $searchResult .= '}';
             }

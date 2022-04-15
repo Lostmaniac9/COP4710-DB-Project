@@ -5,11 +5,12 @@
     $inData = getRequestInfo();
 
     # Contact Book User registration information stored as variables.
-    #$event_ID = isset($inData["event_ID"]);
-    $desc1 = isset($inData["desc1"]);
-    $time =  isset($inData["time"]);         #date('m-d-Y H:i');
-    $loc_name = isset($inData["loc_name"]);
-    $event_name = isset($inData["event_name"]);
+    $event_ID = $inData["event_ID"];
+    $com_event_ID = isset($inData["com_event_ID"]);
+    $text =  isset($inData["text"]);         #date('m-d-Y H:i');
+    $timestamp = isset($inData["timestamp"]);
+    $rating = isset($inData["rating"]);
+    #$event_name = isset($inData["event_name"]);
     
     $searchResult = "";
     $resultCount = 0;
@@ -27,20 +28,17 @@
 	# validation constraints are met or else return an error
     else
     {
-        $searchResult .= '"results" : [';
-        //$query = "SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID AND approved = 1";
-        //$stmt = $conn->prepare($query);
-        $stmt = $conn->prepare("SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID");
+        $searchResult .= '"results" : ['; #SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID
+        $stmt = $conn->prepare("SELECT longitude,latitude FROM locations L, events E WHERE event_ID = ? AND E.loc_name = L.loc_name") ;
+        $stmt->bind_param("s",  $event_ID);
+        #$stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
         if($row = $result->fetch_assoc())
         {
             $searchResult .= '{';
-            $searchResult .= '"event_ID" : "' . $row["event_ID"] . '", ';
-            $searchResult .= '"desc1" : "' . $row["desc1"] . '", ';
-            $searchResult .= '"time" : "' . $row["time"] . '", ';
-            $searchResult .= '"loc_name" : "' . $row["loc_name"] . '", ';
-            $searchResult .= '"event_name" : "' . $row["event_name"] . '" ';
+            $searchResult .= '"longitude" : "' . $row["longitude"] . '", ';
+            $searchResult .= '"latitude" : "' . $row["latitude"] . '" ';
             $searchResult .= '}';
             $resultCount++;
 
@@ -53,11 +51,8 @@
                 }
                 $resultCount++;
                 $searchResult .= '{';
-                    $searchResult .= '"event_ID" : "' . $row["event_ID"] . '", ';
-                    $searchResult .= '"desc1" : "' . $row["desc1"] . '", ';
-                    $searchResult .= '"time" : "' . $row["time"] . '", ';
-                    $searchResult .= '"loc_name" : "' . $row["loc_name"] . '", ';
-                    $searchResult .= '"event_name" : "' . $row["event_name"] . '", ';
+                    $searchResult .= '"longitude" : "' . $row["longitude"] . '", ';
+                    $searchResult .= '"latitude" : "' . $row["latitude"] . '" ';
                 $searchResult .= '}';
             }
             $searchResult .= ']';

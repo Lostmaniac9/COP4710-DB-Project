@@ -10,6 +10,7 @@
     $time =  isset($inData["time"]);         #date('m-d-Y H:i');
     $loc_name = isset($inData["loc_name"]);
     $event_name = isset($inData["event_name"]);
+    $foreign_uni_ID = $inData["foreign_uni_ID"];
     
     $searchResult = "";
     $resultCount = 0;
@@ -28,9 +29,8 @@
     else
     {
         $searchResult .= '"results" : [';
-        //$query = "SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID AND approved = 1";
-        //$stmt = $conn->prepare($query);
-        $stmt = $conn->prepare("SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID");
+        $stmt = $conn->prepare("SELECT * FROM private_events P, events E WHERE (P.event_ID = E.event_ID AND foreign_uni_ID = ?)");
+        $stmt->bind_param("s", $foreign_uni_ID);
         $stmt->execute();
         $result = $stmt->get_result();
         if($row = $result->fetch_assoc())

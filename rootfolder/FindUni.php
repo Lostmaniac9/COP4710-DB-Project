@@ -29,13 +29,14 @@
     else
     {
         $searchResult .= '"results" : [';
-        $query = "SELECT name FROM university";
+        $query = "SELECT * FROM university";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
         if($row = $result->fetch_assoc())
         {
             $searchResult .= '{';
+            $searchResult .= '"uni_ID" : "' . $row["uni_ID"] . '", ';
             $searchResult .= '"name" : "' . $row["name"] . '" ';
             $searchResult .= '}';
             $resultCount++;
@@ -49,6 +50,7 @@
                 }
                 $resultCount++;
                 $searchResult .= '{';
+                    $searchResult .= '"uni_ID" : "' . $row["uni_ID"] . '", ';
                     $searchResult .= '"name" : "' . $row["name"] . '" ';
                 $searchResult .= '}';
             }

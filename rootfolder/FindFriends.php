@@ -6,10 +6,11 @@
 
     # Contact Book User registration information stored as variables.
     #$event_ID = isset($inData["event_ID"]);
-    $desc1 = isset($inData["desc1"]);
-    $time =  isset($inData["time"]);         #date('m-d-Y H:i');
+    $foreign_RSO_ID = $inData["foreign_RSO_ID"];
+    //$username =  $inData["username"];         #date('m-d-Y H:i');
     $loc_name = isset($inData["loc_name"]);
     $event_name = isset($inData["event_name"]);
+    //$foreign_uni_ID = $inData["foreign_uni_ID"];
     
     $searchResult = "";
     $resultCount = 0;
@@ -27,20 +28,16 @@
 	# validation constraints are met or else return an error
     else
     {
-        $searchResult .= '"results" : [';
-        //$query = "SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID AND approved = 1";
-        //$stmt = $conn->prepare($query);
-        $stmt = $conn->prepare("SELECT * FROM public_events P, events E WHERE P.event_ID = E.event_ID");
+        $searchResult .= '"results" : ['; //THIS IS EXTREMELY INAPPROPRITAELY NAMED
+        $stmt = $conn->prepare("SELECT * FROM users P, roster E WHERE ( foreign_RSO_ID = ? AND P.foreign_RSO_ID = E.roster_RSO_ID AND P.UID = E.roster_UID)");
+        $stmt->bind_param("s", $foreign_RSO_ID);
         $stmt->execute();
         $result = $stmt->get_result();
         if($row = $result->fetch_assoc())
         {
             $searchResult .= '{';
-            $searchResult .= '"event_ID" : "' . $row["event_ID"] . '", ';
-            $searchResult .= '"desc1" : "' . $row["desc1"] . '", ';
-            $searchResult .= '"time" : "' . $row["time"] . '", ';
-            $searchResult .= '"loc_name" : "' . $row["loc_name"] . '", ';
-            $searchResult .= '"event_name" : "' . $row["event_name"] . '" ';
+            $searchResult .= '"UID" : "' . $row["UID"] . '", ';
+            $searchResult .= '"username" : "' . $row["username"] . '" ';
             $searchResult .= '}';
             $resultCount++;
 
@@ -53,11 +50,8 @@
                 }
                 $resultCount++;
                 $searchResult .= '{';
-                    $searchResult .= '"event_ID" : "' . $row["event_ID"] . '", ';
-                    $searchResult .= '"desc1" : "' . $row["desc1"] . '", ';
-                    $searchResult .= '"time" : "' . $row["time"] . '", ';
-                    $searchResult .= '"loc_name" : "' . $row["loc_name"] . '", ';
-                    $searchResult .= '"event_name" : "' . $row["event_name"] . '", ';
+                    $searchResult .= '"UID" : "' . $row["UID"] . '", ';
+                    $searchResult .= '"username" : "' . $row["username"] . '" ';
                 $searchResult .= '}';
             }
             $searchResult .= ']';
@@ -66,7 +60,7 @@
 
         else
         {
-            returnWithError("No Results Match");
+            returnWithInfo2();
         }
         $stmt->close();
 
@@ -77,6 +71,12 @@
 
     # obtain the login information based on the input parameters and send information
     # as JSON element.
+    function returnWithInfo2()
+    {
+        $retValue = '{ "error" : "No Results Match"}';
+        sendResultInfoAsJson($retValue);
+    }
+
     function returnWithInfo($searchResult)
     {
         $retValue = '{'. $searchResult .', "error" : ""}';

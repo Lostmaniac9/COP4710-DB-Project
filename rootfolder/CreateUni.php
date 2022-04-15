@@ -27,16 +27,16 @@
     # Query the database to insert the registered user into the Users table if
 	# validation constraints are met or else return an error
     else
-    { $stmt = $conn->prepare("SELECT * FROM university WHERE name =?");
-        $stmt->bind_param("s", $name);
+    { $stmt = $conn->prepare("SELECT * FROM university WHERE uni_superadmin_ID = ? OR name =?");
+        $stmt->bind_param("ss", $uni_superadmin_ID, $name);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $stmt->close();
 
-        if (isset($row['name']))
+        if (isset($row['name']) || isset($row['uni_superadmin_ID']))
 		{
-			returnWithError("University name is already taken.");
+			returnWithError("University name is already taken or superadmin has already made a university.");
 		}
         else{
             $stmt = $conn->prepare("INSERT INTO university (  uni_superadmin_ID, name) VALUES (  ?, ?)");
@@ -47,6 +47,7 @@
             $stmt->close();
             $conn->close();
         }
+        
 			
     }	
 

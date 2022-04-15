@@ -11,7 +11,6 @@
     #$loc_name = $inData["loc_name"];
     #$event_name = $inData["event_name"];
     $text = $inData["text"];
-    $rating = $inData["rating"];
     #$pub_admin_ID = $inData["pub_admin_ID"];
     #$pub_superadmin_ID = "1";
     
@@ -29,16 +28,17 @@
 	# validation constraints are met or else return an error
     else
     { #UPDATE public_events SET approved = '1' WHERE public_events.event_ID = ?
-        $stmt = $conn->prepare("UPDATE comments SET text = ? WHERE comments.com_UID = ? AND comments.com_event_ID = ?");
-        $stmt->bind_param("ssss",  $text, $com_UID, $com_event_ID, $rating);
+        $stmt = $conn->prepare("UPDATE comments SET text = ? WHERE com_UID = ? AND com_event_ID = ?");
+        $stmt->bind_param("sss",  $text, $com_UID, $com_event_ID);
         $stmt->execute();
+        returnWithInfo();
         $stmt->close();
-        returnWithError("Update Successful");
+        
 	}
     
-function returnWithInfo( $sid )
+function returnWithInfo(  )
 	{
-		$retValue = '{"EventID":' . $sid . ',"error":""}';  
+		$retValue = '{"error":""}';  
 		sendResultInfoAsJson( $retValue );
 	}
 

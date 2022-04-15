@@ -27,8 +27,8 @@
 	# validation constraints are met or else return an error
     else
     { 
-            $stmt = $conn->prepare("INSERT INTO comments (  com_UID,com_event_ID, text, timestamp, rating) VALUES (?, ?, ?, ?,?)");
-            $stmt->bind_param("sssss",  $com_UID,$com_event_ID, $text, $timestamp, $rating);
+            $stmt = $conn->prepare("INSERT INTO comments (  com_UID,com_event_ID, text, rating) VALUES (?, ?, ?,?)");
+            $stmt->bind_param("ssss",  $com_UID,$com_event_ID, $text, $rating);
             $stmt->execute();
 	        #$sid = $stmt->insert_id;   #check this one need to get UID
 	        returnWithInfo($com_UID, $com_event_ID );
