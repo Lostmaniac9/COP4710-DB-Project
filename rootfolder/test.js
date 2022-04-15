@@ -1,6 +1,9 @@
 let userId=0;
 let remember = true;
 
+// Value that will store the userId of the logged in session.
+var currentUser = 0;
+
 
 function login(form, e) {
     e.preventDefault();
@@ -12,12 +15,12 @@ function login(form, e) {
             password: form.password.value
         }
     )).ID;
-    
-    
+
+
     if (userId < 1 || userId === undefined) {
-        
-        
-    } 
+
+
+    }
     if(form.loginType.value == "student"){
         userId = apiHandler("Login", JSON.stringify(
             {
@@ -27,12 +30,13 @@ function login(form, e) {
         )).ID;
 
         if (userId != undefined) {
+            localStorage.setItem("currentUser", userId);
             window.location.assign("student.html");
         }
         else{
             alert('Credentials invalid.');
         }
-    
+
     }
 
     else if(form.loginType.value == "admin"){
@@ -44,12 +48,13 @@ function login(form, e) {
         )).ID;
 
         if (userId != undefined) {
+            localStorage.setItem("currentUser", userId);
             window.location.assign("admin.html");
         }
         else{
             alert('Credentials invalid.');
         }
-    
+
     }
     else if(form.loginType.value == "superadmin"){
         userId = apiHandler("LoginSA", JSON.stringify(
@@ -60,12 +65,13 @@ function login(form, e) {
         )).ID;
 
         if ( userId != undefined) {
+            localStorage.setItem("currentUser", userId);
             window.location.assign("superadmin.html");
         }
         else{
             alert('Credentials invalid.');
         }
-    
+
     }
     else{
         alert('Credentials invalid.');
@@ -73,11 +79,15 @@ function login(form, e) {
 
 }
 
+// Function that returns the user id of the logged in user. 
+function getCurrentUser() {
+    return localStorage.getItem("currentUser");
+}
 
 function findEvents( e){
     e.preventDefault();
     e.stopPropagation();
-    
+
     //let eventID = 0;
     //document.write('<div>Login successful</div>');
     list = ApiHandler("FindEvents", JSON.stringify(
@@ -95,7 +105,7 @@ function findEvents( e){
 function findUnapproved( e){
     e.preventDefault();
     e.stopPropagation();
-    
+
     //let eventID = 0;
     //document.write('<div>Login successful</div>');
     list = ApiHandler("FindUnapproved", JSON.stringify(
@@ -113,7 +123,7 @@ function findUnapproved( e){
 function findSpecific( e, sel){
     e.preventDefault();
     e.stopPropagation();
-    
+
     //let eventID = 0;
     //document.write(sel);
     //document.write('<div>Login successful</div>');
@@ -127,7 +137,7 @@ function findSpecific( e, sel){
     }
     //document.write("test");
     return list;
-    
+
 }
 
 function findCoords( e, sel){
@@ -176,7 +186,7 @@ function findLocations( e){
     if(list == undefined){
         list = [];
     }
-    
+
     return list;
     document.write("test");
 }
@@ -185,7 +195,7 @@ function createUni(form, e){
     e.preventDefault();
     e.stopPropagation();
     let t = "";
-    
+
     //let eventID = 0;
     //document.write('<div>Login successful</div>');
     //document.write(userId);
@@ -197,7 +207,7 @@ function createUni(form, e){
         alert('University Name Empty');
         t = "dd";
         return;
-    } 
+    }
 
     t = ApiHandler("CreateUni", JSON.stringify(
         {
@@ -215,8 +225,8 @@ function createUni(form, e){
         alert("You've already made a University or the Unversity name is already taken.");
     }
         //document.write("hellooo");
-    
-    
+
+
 }
 
 function findEventsA( e){
@@ -283,7 +293,7 @@ function signup(form, e) {
         else{
             alert('Username/Password invalid.');
         }
-    
+
     }
 
     else if(form.signupType.value == "admin"){
@@ -300,7 +310,7 @@ function signup(form, e) {
         else{
             alert('Username/Password invalid.');
         }
-    
+
     }
     else if(form.signupType.value == "superadmin"){
         test = apiHandler("SignupSA", JSON.stringify(
@@ -316,7 +326,7 @@ function signup(form, e) {
         else{
             alert('Username/Password invalid.');
         }
-    
+
     }
     else{
         alert('Please Select an Account Type.');
@@ -328,6 +338,3 @@ function signup(form, e) {
     // $("#login-modal").modal('toggle');
     // searchContacts("All", "");
 }
-
-
-
