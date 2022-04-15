@@ -30,22 +30,22 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3 center">
-					<div class="h1 mx-sm-3">
+					<div class="h1">
 						Create your account!
 					</div>
 					<!-- TODO: Route Login and Signup buttons to point to pages -->
 					<form onSubmit="signup(this, event)">
-					<div class="form-group mx-sm-3">
+					<div class="form-group">
 						<label>Name</label>
 						<input type="text" class="form-control col-xs-2" name="username" placeholder="Enter name...">
 						<small id="nameHelp" class="form-text text-muted">Enter name...</small>
 					</div>
-					<div class="form-group mx-sm-3">
+					<div class="form-group">
 						<label>Password</label>
 						<input type="text" class="form-control  col-xs-2" name="password" placeholder="Password">
 						<small id="passHelp" class="form-text text-muted">Enter password.</small>
 					</div>
-					<div class="form-group mx-sm-3">
+					<div class="form-group">
 						<label>Confirm Password</label>
 						<input type="text" class="form-control  col-xs-2" name="passwordConfirm" placeholder="Confirm password...">
 						<small id="passHelp" class="form-text text-muted">Confirm password.</small>
@@ -74,11 +74,15 @@
 					<hr />
 					<button type="submit" class="btn btn-primary mx-sm-3">Create Account</button>
 					</form>
+					<div>
+						<button type="submit" class="btn btn-primary my-1 mx-sm-3">Add Comment</button>
+					</div>
+					<div>
+						<table id="publicEvents" align = "center" border="1px"></table>
+					</div>
 				</div>
-				<div class="col-lg-3 center"></div>
-				<div class="col-lg-6 center">
-					<button type="submit" class="btn btn-primary my-1">Add Comment</button>
-					<table id="publicEvents" align = "center" border="1px"></table>
+				<div class="col-lg-9 center">
+
 				</div>
 			</div>
 		</div>
