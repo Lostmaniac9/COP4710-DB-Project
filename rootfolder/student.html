@@ -9,34 +9,625 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Student</title>
-    <!--<table class = "table table-striped">
-        <tr class = "bg-info">
-            <th>Name</th>
-            <th>Name</th>
-            <th>Name</th>
-            <th>Name</th>
-            <th>Name</th>
-        </tr>
-        <tbody id = "myTable"></tbody>
-    </table>
-    <script>
-        function buildTable(data){
-            var table = document.getElementByID('myTable');
-            for(var i = 0; i < data.length; i++){
-                var row = `<tr>
-                            <td${data[i].event_ID} </td>
-                            <td${data[i].desc1} </td>
-                            <td${data[i].time} </td>
-                            <td${data[i].loc_name} </td>
-                            <td${data[i].event_name} </td>
-                            </tr>`
-                            table.innerHTML += row
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        
+        </style>
+
+
+<script language="javascript" type="text/javascript">
+    var t1 =0 ;
+    var t2 =0;
+    var msg;
+    var ddd1; var ddd2;
+
+
+    function Button1_onclick() {
+        window.top.location.href='https://maps.google.com/maps?q=28.60242058176763, -81.2000437134752&hl=es;z=14&amp;output=embed'
+        //var url = "https://maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+        //document.getElementById('map').setAttribute("src", url); // = "//maps.google.com/maps?q=28.611702528435895,-81.20711821815813&hl=es;z=14&amp;output=embed";
+       //parent.test();
+    }
+    var ddd;
+    function populateSelect() {
+        // THE JSON ARRAY.
+        var list = findComments(event);
+        //document.write(list[0].loc_name)
+
+        var ele = document.getElementById('sel');
+        //ddd = document.getElementById('sel');
+        //ddd = ele.options[ele.selectedIndex].text;
+        for (var i = 0; i < list.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            ele.innerHTML = ele.innerHTML +
+                '<option value="' + list[i]['ID'] + '">' + list[i]['com_event_ID'] + '</option>';
+        }
+    }
+
+    function show(ele) {
+        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
+        msg = document.getElementById('msg');
+        msg.innerHTML = 'Selected Location: <b>' + ele.options[ele.selectedIndex].text + '</b> </br>' ;
+            //+ 'ID: <b>' + ele.value + '</b>';
+    }
+
+
+function hmmm(){
+    var list = findComments(event);
+        //document.write(list[0].loc_name)
+        
+        var ele = document.getElementById('sel');
+        
+        for (var i = 0; i < list.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            ele.innerHTML = ele.innerHTML +
+                '<option value="' + list[i]['ID'] + '">' + list[i]['com_event_ID'] + '</option>';
+        }
+        myFunction1();
+}
+
+function hmmm2(){
+    var list = findRSOs(event);
+        //document.write(list[0].loc_name)
+        
+        var ele = document.getElementById('sel1');
+        
+        for (var i = 0; i < list.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            ele.innerHTML = ele.innerHTML +
+                '<option value="' + list[i]['ID'] + '">' + list[i]['RSO_ID'] + '</option>';
+        }
+        myFunction2();
+}
+
+function teste(){
+    //document.write(t1);
+    //find long and lat and set to t1,t2
+        if(t1 == null){
+            document.write("testing");
+        }
+        else{
+            //document.write("testing111");
+            Button2_onclick(t1,t2);
+        }
+    }
+
+    function approve1(){
+    //document.write(t1);
+    //document.write("test");
+    //test = ele.options[ele.selectedIndex].text;
+    
+       var hold = approve(event, test);//document.write("test");
+       if(hold == ""){
+        alert("Event approved!");
+
+       }
+       else{
+        alert("Something went wrong!");
+       }
+    }
+
+function myFunction1() { //come back to this
+    //msg = document.getElementById('msg');
+    //test = ele.options[ele.selectedIndex].text;
+    //document.getElementById("msg").innerHTML = test;
+//document.write("test");
+    var list3 = findComments(event);
+    //populateSelect();
+    // var list2 = findRSOEvents(event);
+    //t1 = list[0].longitude;
+    // document.getElementById("t1").innerHTML =
+    //            "t1 = "+t1;
+    //document.write(t1);
+    //t2 = list[0].latitude;
+    // document.getElementById("t2").innerHTML =
+    //            "t2 = "+t2;
+    //var x = JSON.parse(results);
+    //document.write(list[0].longitude);
+    //document.write("results");
+    //document.write(x[0]);
+
+        var cols = [];
+         
+        for (var i = 0; i < list.length; i++) {
+            for (var k in list[i]) {
+                if (cols.indexOf(k) === -1) {
+                     
+                    // Push all keys to the array
+                    cols.push(k);
+                }
             }
         }
-</script>-->
+         
+        // Create a table element
+        var table = document.createElement("table");
+         
+        // Create table row tr element of a table
+        var tr = table.insertRow(-1);
+         
+        for (var i = 0; i < cols.length; i++) {
+             
+            // Create the table header th element
+            var theader = document.createElement("th");
+            theader.innerHTML = cols[i];
+             
+            // Append columnName to the table row
+            tr.appendChild(theader);
+        }
+         
+        // Adding the data to the table
+        for (var i = 0; i < list.length; i++) {
+             
+            // Create a new row
+            trow = table.insertRow(-1);
+            for (var j = 0; j < cols.length; j++) {
+                var cell = trow.insertCell(-1);
+                 
+                // Inserting the cell at particular place
+                cell.innerHTML = list[i][cols[j]];
+            }
+        }
+         
+        // Add the newly created table containing json data
+        var el = document.getElementById("commentTable");
+        el.innerHTML = "";
+        el.appendChild(table);
+    
+}
+
+function myFunction2() { //come back to this
+    //msg = document.getElementById('msg');
+    //test = ele.options[ele.selectedIndex].text;
+    //document.getElementById("msg").innerHTML = test;
+//document.write("test");
+    var list = findRSOs(event);
+    //populateSelect();
+    // var list2 = findRSOEvents(event);
+    //t1 = list[0].longitude;
+    // document.getElementById("t1").innerHTML =
+    //            "t1 = "+t1;
+    //document.write(t1);
+    //t2 = list[0].latitude;
+    // document.getElementById("t2").innerHTML =
+    //            "t2 = "+t2;
+    //var x = JSON.parse(results);
+    //document.write(list[0].longitude);
+    //document.write("results");
+    //document.write(x[0]);
+
+        var cols = [];
+         
+        for (var i = 0; i < list.length; i++) {
+            for (var k in list[i]) {
+                if (cols.indexOf(k) === -1) {
+                     
+                    // Push all keys to the array
+                    cols.push(k);
+                }
+            }
+        }
+         
+        // Create a table element
+        var table = document.createElement("table");
+         
+        // Create table row tr element of a table
+        var tr = table.insertRow(-1);
+         
+        for (var i = 0; i < cols.length; i++) {
+             
+            // Create the table header th element
+            var theader = document.createElement("th");
+            theader.innerHTML = cols[i];
+             
+            // Append columnName to the table row
+            tr.appendChild(theader);
+        }
+         
+        // Adding the data to the table
+        for (var i = 0; i < list.length; i++) {
+             
+            // Create a new row
+            trow = table.insertRow(-1);
+            for (var j = 0; j < cols.length; j++) {
+                var cell = trow.insertCell(-1);
+                 
+                // Inserting the cell at particular place
+                cell.innerHTML = list[i][cols[j]];
+            }
+        }
+         
+        // Add the newly created table containing json data
+        var el = document.getElementById("existingRSOs");
+        el.innerHTML = "";
+        el.appendChild(table);
+    
+}
+
+function myFunction3() { //come back to this
+    //msg = document.getElementById('msg');
+    //test = ele.options[ele.selectedIndex].text;
+    //document.getElementById("msg").innerHTML = test;
+//document.write("test");
+    var list = findForYou(event);
+    //populateSelect();
+    // var list2 = findRSOEvents(event);
+    //t1 = list[0].longitude;
+    // document.getElementById("t1").innerHTML =
+    //            "t1 = "+t1;
+    //document.write(t1);
+    //t2 = list[0].latitude;
+    // document.getElementById("t2").innerHTML =
+    //            "t2 = "+t2;
+    //var x = JSON.parse(results);
+    //document.write(list[0].longitude);
+    //document.write("results");
+    //document.write(x[0]);
+
+        var cols = [];
+         
+        for (var i = 0; i < list.length; i++) {
+            for (var k in list[i]) {
+                if (cols.indexOf(k) === -1) {
+                     
+                    // Push all keys to the array
+                    cols.push(k);
+                }
+            }
+        }
+         
+        // Create a table element
+        var table = document.createElement("table");
+         
+        // Create table row tr element of a table
+        var tr = table.insertRow(-1);
+         
+        for (var i = 0; i < cols.length; i++) {
+             
+            // Create the table header th element
+            var theader = document.createElement("th");
+            theader.innerHTML = cols[i];
+             
+            // Append columnName to the table row
+            tr.appendChild(theader);
+        }
+         
+        // Adding the data to the table
+        for (var i = 0; i < list.length; i++) {
+             
+            // Create a new row
+            trow = table.insertRow(-1);
+            for (var j = 0; j < cols.length; j++) {
+                var cell = trow.insertCell(-1);
+                 
+                // Inserting the cell at particular place
+                cell.innerHTML = list[i][cols[j]];
+            }
+        }
+         
+        // Add the newly created table containing json data
+        var el = document.getElementById("existingRSOs");
+        el.innerHTML = "";
+        el.appendChild(table);
+    
+}
+
+function theThing() {
+    //get user info
+    //alert("testing");
+    var list = findPubEvents(event);
+    
+    var list1 = findPriEvents(event);
+
+    var list2 = findFriends(event);
+    var list3 = showRSOEvents(event);
+
+
+        var cols = [];
+         
+        for (var i = 0; i < list.length; i++) {
+            for (var k in list[i]) {
+                if (cols.indexOf(k) === -1) {
+                     
+                    // Push all keys to the array
+                    cols.push(k);
+                }
+            }
+        }
+         
+        // Create a table element
+        var table = document.createElement("table");
+         
+        // Create table row tr element of a table
+        var tr = table.insertRow(-1);
+         
+        for (var i = 0; i < cols.length; i++) {
+             
+            // Create the table header th element
+            var theader = document.createElement("th");
+            theader.innerHTML = cols[i];
+             
+            // Append columnName to the table row
+            tr.appendChild(theader);
+        }
+         
+        // Adding the data to the table
+        for (var i = 0; i < list.length; i++) {
+             
+            // Create a new row
+            trow = table.insertRow(-1);
+            for (var j = 0; j < cols.length; j++) {
+                var cell = trow.insertCell(-1);
+                 
+                // Inserting the cell at particular place
+                cell.innerHTML = list[i][cols[j]];
+            }
+        }
+         
+        // Add the newly created table containing json data
+        var el = document.getElementById("publicEvents");
+        el.innerHTML = "";
+        el.appendChild(table);
+
+
+        var cols1 = [];
+         
+         for (var i = 0; i < list1.length; i++) {
+             for (var k in list1[i]) {
+                 if (cols1.indexOf(k) === -1) {
+                      
+                     // Push all keys to the array
+                     cols1.push(k);
+                 }
+             }
+         }
+          
+         // Create a table element
+         var table1 = document.createElement("table");
+          
+         // Create table row tr element of a table
+         var tr1 = table1.insertRow(-1);
+          
+         for (var i = 0; i < cols1.length; i++) {
+              
+             // Create the table header th element
+             var theader1 = document.createElement("th");
+             theader1.innerHTML = cols1[i];
+              
+             // Append columnName to the table row
+             tr1.appendChild(theader1);
+         }
+          
+         // Adding the data to the table
+         for (var i = 0; i < list1.length; i++) {
+              
+             // Create a new row
+             trow1 = table1.insertRow(-1);
+             for (var j = 0; j < cols1.length; j++) {
+                 var cell1 = trow1.insertCell(-1);
+                  
+                 // Inserting the cell at particular place
+                 cell1.innerHTML = list1[i][cols1[j]];
+             }
+         }
+          
+         // Add the newly created table containing json data
+         var el1 = document.getElementById("privateEvents");
+         el1.innerHTML = "";
+         el1.appendChild(table1);
 
 
 
+         var cols3 = [];
+         
+         for (var i = 0; i < list3.length; i++) {
+             for (var k in list3[i]) {
+                 if (cols3.indexOf(k) === -1) {
+                      
+                     // Push all keys to the array
+                     cols3.push(k);
+                 }
+             }
+         }
+          
+         //DO IF IN RSO //if user info rso thing != null or 0 then do this
+         // Create a table element
+         var table3 = document.createElement("table");
+          
+         // Create table row tr element of a table
+         var tr3 = table3.insertRow(-1);
+          
+         for (var i = 0; i < cols3.length; i++) {
+              
+             // Create the table header th element
+             var theader3 = document.createElement("th");
+             theader3.innerHTML = cols3[i];
+              
+             // Append columnName to the table row
+             tr3.appendChild(theader3);
+         }
+          
+         // Adding the data to the table
+         for (var i = 0; i < list3.length; i++) {
+              
+             // Create a new row
+             trow3 = table3.insertRow(-1);
+             for (var j = 0; j < cols3.length; j++) {
+                 var cell3 = trow3.insertCell(-1);
+                  
+                 // Inserting the cell at particular place
+                 cell3.innerHTML = list3[i][cols3[j]];
+             }
+         }
+          
+         // Add the newly created table containing json data
+         var el3 = document.getElementById("rsoEvents");
+         el3.innerHTML = "";
+         el3.appendChild(table3);
+    
+         var cols2 = [];
+         
+         for (var i = 0; i < list2.length; i++) {
+             for (var k in list2[i]) {
+                 if (cols2.indexOf(k) === -1) {
+                      
+                     // Push all keys to the array
+                     cols2.push(k);
+                 }
+             }
+         }
+          
+         //DO IF IN RSO //if user info rso thing != null or 0 then do this
+         // Create a table element
+         var table2 = document.createElement("table");
+          
+         // Create table row tr element of a table
+         var tr2 = table2.insertRow(-1);
+          
+         for (var i = 0; i < cols2.length; i++) {
+              
+             // Create the table header th element
+             var theader2 = document.createElement("th");
+             theader2.innerHTML = cols2[i];
+              
+             // Append columnName to the table row
+             tr2.appendChild(theader2);
+         }
+          
+         // Adding the data to the table
+         for (var i = 0; i < list2.length; i++) {
+              
+             // Create a new row
+             trow2 = table2.insertRow(-1);
+             for (var j = 0; j < cols2.length; j++) {
+                 var cell2 = trow2.insertCell(-1);
+                  
+                 // Inserting the cell at particular place
+                 cell2.innerHTML = list2[i][cols2[j]];
+             }
+         }
+          
+         // Add the newly created table containing json data
+         var el2 = document.getElementById("rsoMembers");
+         el2.innerHTML = "";
+         el2.appendChild(table2);
+}
+
+function dd(form,event){
+    
+   var name1 = createUni(form,event);
+   if(name1 != undefined){
+       alert("University Successfully Made!");
+    name = document.getElementById('name');
+   document.getElementById("name").innerHTML = name1;
+   }
+   
+}
+
+function editComment(form, event){
+    //document.write(ddd);
+    var holding = form.text.value;
+
+    var xdxd = ("'" + holding + "'");
+
+    form.text = xdxd;
+
+    var comment = editComm(form,event,ddd);
+   
+    var plz = updateRating(form,event,ddd);
+
+    alert("Comment Changed. Please refresh page.");
+
+}
+
+function addComment(form, event){ // COME BACK TO THIS
+    // alert("jfdlkajfald");
+    // alert(form.text.value);
+    // alert(form.rating.value);
+    var comment = addComm(form,event,ddd2);
+    //document.write("fdjasflkajsl");
+    //var plz = updateRating(form,event,ddd);
+    alert("Add comment was successful");
+}
+
+function deleteComm(form, event){
+    //get user
+
+    var comment1 = deleteComment(form,event,ddd);
+ 
+    alert("Comment Deleted. Please refresh page.");
+}
+function myFunction23(ele1) {
+    //var list = findEvents(event);
+    //document.write(ele.value);
+    ddd1 = ele1.options[ele1.selectedIndex].text;
+}
+
+function myFunction24(ele2) {
+    //var list = findEvents(event);
+    //document.write(ele.value);
+    ddd2 = ele2.options[ele2.selectedIndex].text;
+
+    var list = findCoords1(event, ddd2);
+        t1 = list[0].longitude;
+        // document.getElementById("t1").innerHTML =
+        //            "t1 = "+t1;
+        //document.write(t1);
+        t2 = list[0].latitude;
+}
+
+function justforyou(){
+    
+    var list = findForYou(event, ddd2);
+        //document.write(list[0].loc_name)
+        //document.write("testt");
+        var ele = document.getElementById('sel2');
+        
+        for (var i = 0; i < list.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+            ele.innerHTML = ele.innerHTML +
+                '<option value="' + list[i]['ID'] + '">' + list[i]['event_ID'] + '</option>';
+        }
+        //alert("comment successfully added");
+}
+
+function myFunction(ele) {
+    //var list = findEvents(event);
+    //document.write(ele.value);
+    ddd = ele.options[ele.selectedIndex].text;
+    //document.write(ddd);
+    //var x = JSON.parse(results);
+    //document.write(results[0].event_ID);
+    //document.write("results");
+    //document.write(x[0]);
+
+}
+
+function joinRSO(){
+    
+    JoinRSO(event, ddd1);
+    alert("Successfully Joined RSO");
+}
+
+function leaveRSO(){
+    //document.write("hello");
+    LeaveRSO(event, ddd1);
+    alert("Successfully Left RSO");
+}
+</script>
 
   </head>
   <body>
@@ -56,19 +647,19 @@
                 
                 <div>
                     <h4>Existing RSOs</h4>
-                    <button type="button" class="btn btn-primary"  onClick = "">Show RSOs</button>
+                    <button type="button" class="btn btn-primary"  onClick = "hmmm2()">Show RSOs</button><hr />
                     <table id="existingRSOs" align = "center" border="1px"></table>
                 </div>
                 <div class="modal-footer">
                     <form>
                         <!--This is the dropdown to select an event ID from, and then you click the button right after this dropdown to show it up in the table further down-->
-                        <select id="sel" onchange="myFunction(this)">
+                        <select id="sel1" onchange="myFunction23(this)">
                         <option value="">-- Select --</option>
                         </select>
                         <!--<button class="btn btn-primary" onclick="myFunction()">Select event</button>
                         Not sure what to put for button type here, since it is to trigger an independant call to the api, "button" appears to the type used for generic actions like this-->
-                        <button type="button" class="btn btn-primary" onClick = "">Join RSO</button>
-                        <button type="button" class="btn btn-danger" onClick = "">Leave RSO</button>
+                        <button type="button" class="btn btn-primary" onClick = "joinRSO()">Join RSO</button>
+                        <button type="button" class="btn btn-danger" onClick = "leaveRSO()">Leave RSO</button>
                     </form>
                 </div>
                 <div>
@@ -79,10 +670,12 @@
             </div>
             <div class="col-lg-6 center">
                 <form id="formComment">
-                    <button type="button" class="btn btn-primary" onClick = "populateSelect()" >Populate Dropdown</button>
+                    <button type="submit" form="formComment" class="btn btn-primary my-1" onClick = "theThing(event)">Show Events</button>
+                    <button type="button" class="btn btn-primary" onClick = "hmmm()" >Show Comments</button> 
                         <select id="sel" onchange="myFunction(this)">
                             <option value="">-- Select --</option>
                         </select>
+                        <table id="commentTable" align = "center" border="1px"></table>
                   <div class="form-group">
                     <label for="text">Enter comment...</label>
                     <textarea class="form-control" id="text" rows="3"></textarea>
@@ -97,10 +690,19 @@
                     <option value="4">Four</option>
                     <option value="5">Five</option>
                   </select>
-
-                  <button type="submit" form="formComment" class="btn btn-primary my-1">Add Comment</button>
-                  <button type="submit" form="formComment" class="btn btn-primary my-1">Edit Comment</button>
-                  <button type="submit" form="formComment" class="btn btn-danger my-1">Delete Comment</button>
+                  
+                  
+                  <button type="submit" form="formComment" class="btn btn-primary my-1" onClick = "editComment(this.form, event)">Edit Comment</button>
+                  <button type="submit" form="formComment" class="btn btn-danger my-1" onClick = "deleteComm(this.form, event)">Delete Comment</button>
+                  <hr/>
+                  <button type="button" class="btn btn-primary"  onClick = "justforyou()">Where would you like to comment?</button>
+                  <select id="sel2" onchange="myFunction24(this)">
+                    <option value="">-- Select --</option>
+                </select>
+                  <button type="submit" form="formComment" class="btn btn-primary my-1" onClick = "addComment(this.form, event, sel)">Add Comment</button>
+                  <input type="button" class="btn btn-primary" 
+        onclick="teste()" 
+            value="See event?" />
                 </form>
 
             </div>
@@ -122,64 +724,12 @@ function loadComments() {
     })
 }
 </script>
-<script>function myFunction() {
-    var list = findEvents(event);
-    //var x = JSON.parse(results);
-    //document.write(results[0].event_ID);
-    //document.write("results");
-    //document.write(x[0]);
 
-            var cols = [];
-
-            for (var i = 0; i < list.length; i++) {
-                for (var k in list[i]) {
-                    if (cols.indexOf(k) === -1) {
-
-                        // Push all keys to the array
-                        cols.push(k);
-                    }
-                }
-            }
-
-            // Create a table element
-            var table = document.createElement("table");
-
-            // Create table row tr element of a table
-            var tr = table.insertRow(-1);
-
-            for (var i = 0; i < cols.length; i++) {
-
-                // Create the table header th element
-                var theader = document.createElement("th");
-                theader.innerHTML = cols[i];
-
-                // Append columnName to the table row
-                tr.appendChild(theader);
-            }
-
-            // Adding the data to the table
-            for (var i = 0; i < list.length; i++) {
-
-                // Create a new row
-                trow = table.insertRow(-1);
-                for (var j = 0; j < cols.length; j++) {
-                    var cell = trow.insertCell(-1);
-
-                    // Inserting the cell at particular place
-                    cell.innerHTML = list[i][cols[j]];
-                }
-            }
-
-            // Add the newly created table containing json data
-            var el = document.getElementById("table");
-            el.innerHTML = "";
-            el.appendChild(table);
-
-}</script>
 
     <script src="md5.js"></script>
     <script src="index.js"></script>
     <script src="test.js"></script>
+    <script src="map.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
